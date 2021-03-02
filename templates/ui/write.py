@@ -51,6 +51,7 @@ def save_gameinfo():
     main = img['href']
     data = requests.get(main, headers=headers)
     gong = BeautifulSoup(data.text, 'html.parser')
+    print(gong.select_one('meta[property="og:image"]'))
     try:
         image = gong.select_one('meta[property="og:image"]')['content']
     except:

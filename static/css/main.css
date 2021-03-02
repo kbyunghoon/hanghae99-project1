@@ -61,5 +61,6 @@ body {
     position: absolute;
     right: 0;
     margin: 30px;
+    color: #FFFFFF; !important;
     font-family: 'Jua', sans-serif;
 }

@@ -14,7 +14,7 @@
     <div class="wrap">
         <div class="post-box">
             {% if request.cookies.mytoken is not none and request.cookies.mytoken != undefined %}
-            <button id="write_Button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#writeModal"
+            <button id="write_Button" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#writeModal"
                     data-whatever="@mdo">글쓰기
             </button>
             {% endif %}

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent">
     <a class="logo-a" href="/">
     <div class="logo-wrap">
         <img src="../../static/image/logo.png" width="130">
@@ -9,9 +9,9 @@
     </a>
     <div class="log-IO">
         {% if request.cookies.mytoken is none or request.cookies.mytoken == undefined %}
-        <button type="button" class="btn btn-primary" onclick="logIn()">Log In</button>
+        <button id="logIn_button" type="button" class="btn btn-outline-primary" onclick="logIn()">Log In</button>
         {% elif request.cookies.mytoken is not none and request.cookies.mytoken != undefined %}
-        <button type="button" class="btn btn-primary" onclick="logOut('mytoken')">Log Out</button>
+        <button id="logOut_button" type="button" class="btn btn-outline-danger" onclick="logOut('mytoken')">Log Out</button>
         <p id="userId_text" class="log-Text">님 안녕하세요.</p>
         {% endif %}
     </div>
