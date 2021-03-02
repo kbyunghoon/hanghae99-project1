@@ -4,6 +4,7 @@ from templates.login.login import login_blueprint
 from templates.register.register import register_blueprint
 from templates.ui.write import write_blueprint
 from templates.main.main import main_blueprint
+from pymongo import MongoClient
 
 app = Flask(__name__)
 app.register_blueprint(login_blueprint)

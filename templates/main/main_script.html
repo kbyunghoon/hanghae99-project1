@@ -1,30 +1,24 @@
 <script>
     $(document).ready(function () {
-        load_com();
-        //로딩
-    });
-
-    function load_com() {
-        //로딩
         $.ajax({
             type: "GET",
             url: "/write",
             data: {},
             success: function (response) {
-                let games = response['game_data'];
+                let games = response['all_game_data'];
                 if (games != undefined && games != null) {
                     for (let i = 0; i < games.length; i++) {
-                        let title = games[i]['title'] //게임명
+                        let title = games[i]['game_name'] //게임명
                         let image = games[i]['image'] //게임 이미지
                         let genre = games[i]['genre'] //장르
                         let age = games[i]['age'] //등급
                         let release = games[i]['release'] //출시일
                         let platform = games[i]['platform'] //플랫폼
                         let like = games[i]['like'] //좋아요
-                        let desc = games[i]['desc'] //내용
                         let homepage = games[i]['homepage'] //게임 공식홈페이지
-                        let nickname = games[i]['nickname'] //작성자
+                        let id = games[i]['id'] //작성자
                         let kor = games[i]['kor'] //한국어 지원
+                        let text = games[i]['text'] //한국어 지원
                         temp_html = `<div class="card mini-size">
                 <img class="card-img-top"
                      src="${image}"
@@ -34,7 +28,7 @@
                         <a href=${homepage} class="games"">${title}</a>
                     </h5>
                     <p class="card-text"
-                       style="float: right; border-left: 1px solid rgba(0,0,0,.125); padding: 0px 0px 0px 5px;">${nickname}</p>
+                       style="float: right; border-left: 1px solid rgba(0,0,0,.125); padding: 0px 0px 0px 5px;">${id}</p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" id="hash">
@@ -48,7 +42,7 @@
                     <li class="sss">출시일 : ${release}</li>
                 </ul>
                 <div class="card-body" style="font-size: 15px;">
-                ${desc}
+                ${text}
                     </div>
                                                     <footer class="card-footer">
                                                         <a href="#" onclick="likeStar('${title}')" class="card-footer-item has-text-info">
@@ -64,8 +58,7 @@
                 }
             }
         })
-    }
-
-
+        //로딩
+    });
 
 </script>
