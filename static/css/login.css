@@ -1,0 +1,22 @@
+.login-box {
+    width: 400px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 80px 50px;
+    margin: auto;
+}
+
+.login-box-flex {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.m-tb-15 {
+    margin: 15px 0;
+}
+
+.h-900 {
+    height: 900px;
+}

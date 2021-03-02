@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    {% include './common/head.html' %}
+
+    <!-- Css -->
+    <link rel="preload" as="style" href="../../static/css/main.css" />
+    <link rel="stylesheet" href="../../static/css/main.css" />
+</head>
+<body>
+    <header>{% include './common/header.html' %}</header>
+    {% include './ui/write_PopUp.html' %}
+    {% include './ui/alert_modal.html' %}
+    <div class="wrap">
+        <div class="post-box">
+            {% if request.cookies.mytoken is not none and request.cookies.mytoken != undefined %}
+            <button id="write_Button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#writeModal"
+                    data-whatever="@mdo">글쓰기
+            </button>
+            {% endif %}
+        </div>
+        <div id="cards-box" class="card-sizee">
+            <!--            카드가 들어갈곳-->
+        </div>
+    </div>
+    {% include './common/body.html' %}
+    {% include './main/main_script.html' %}
+    {% include './ui/write_PopUp_script.html' %}
+</body>
+</html>

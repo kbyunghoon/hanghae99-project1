@@ -1,0 +1,9 @@
+.nullAlertModal {
+    background-color: #FFFB7A;
+    text-align: center;
+}
+
+.nullAlertModalText {
+    font-size: 30px;
+    font-family: 'Jua', sans-serif;
+}

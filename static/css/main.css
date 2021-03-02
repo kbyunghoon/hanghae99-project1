@@ -1,0 +1,65 @@
+body {
+    background-image: url('https://wallpapercave.com/wp/wp4585033.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrap {
+    width: 1000px;
+    margin: auto;
+}
+
+.test {
+    font-size: xxx-large;
+    display: inline-block;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0px;
+    height: 14px;
+    border-radius: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 12px;
+    line-height: 120%;
+    color: rgb(55, 53, 47);
+    background: rgba(255, 0, 26, 0.2);
+    margin: 0px 6px 0px 0px;
+}
+
+.card-bodys {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 0.25rem;
+}
+
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.sss {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, .125)
+}
+
+.card-sizee {
+    width: auto;
+
+}
+
+.mini-size {
+    width: 300px;
+    float: left;
+    margin: 5px;
+}
+
+#write_Button {
+    position: absolute;
+    right: 0;
+    margin: 30px;
+    font-family: 'Jua', sans-serif;
+}

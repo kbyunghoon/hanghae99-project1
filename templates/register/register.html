@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% include './common/head.html' %}
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="preload" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+
+    <!-- Css -->
+    <link rel="preload" as="style" href="../../static/css/register.css" />
+    <link rel="stylesheet" href="../../static/css/register.css" />
+</head>
+
+<body>
+    <header>{% include './common/header.html' %}</header>
+    <div class="container h-900">
+        <div class="register-box-flex">
+            <div class="register-box">
+                <h1>Register</h1>
+                <div class="register-id-box m-tb-15">
+                    <div class="register-id-box-flex">
+                        <input type="text" id="userID" class="form-control " placeholder="아이디는 영어+숫자+10자 이하 입니다."
+                               aria-label="User-ID" maxlength="10"
+                               aria-describedby="basic-addon1">
+                        <button class="btn id-check-btn" type="button" onclick="idCheck()">확인</button>
+                    </div>
+                </div>
+                <span id="idCheck-txt"></span>
+                <input type="password" id="userPW" class="form-control m-tb-15" placeholder="비밀번호는 4~8자리여야합니다."
+                       aria-label="Username"
+                       aria-describedby="basic-addon1" maxlength="8">
+                <input type="text" id="userName" class="form-control m-tb-15" placeholder="이름을 입력해주세요" aria-label="Username"
+                       aria-describedby="basic-addon1">
+                <button type="button" onclick="setUser()" class="btn btn-primary btn-lg btn-block">회원가입</button>
+            </div>
+        </div>
+    </div>
+    {% include './common/body.html' %}
+    {% include './register/register_script.html' %}
+</body>
+</html>

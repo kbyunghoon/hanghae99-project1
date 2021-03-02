@@ -1,0 +1,72 @@
+<script>
+    function idCheck() {
+        let idCheck = /^[A-Za-z0-9]{0,10}$/;
+        let uid = $("#userID").val()
+        if ($("#userID").val() == '') {
+            alert('아이디를 입력하세요.');
+            $("#userID").focus();
+            return false;
+        } else if (!idCheck.test(uid)) {
+            alert('아이디는 영어+숫자를 조합해 10자이하여야합니다.');
+            $("#userID").focus();
+            return false;
+        }
+        let u_id = $("#userID").val();
+        $.ajax({
+            type: "POST",
+            url: "/idCheck",
+            data: {
+                userID_give: u_id
+            },
+            success: function (response) {
+                let result = response['exists']
+                if (result == true) {
+                    $("#idCheck-txt").text('이미 존재하는 아이디입니다.').addClass("active");
+                    $("#userID").focus();
+                    return false;
+                } else if (result == false) {
+                    $("#idCheck-txt").text('사용가능한 아이디입니다.').addClass("active");
+                    return false;
+                }
+            }
+        });
+    }
+
+    function setUser() {
+        if ($("#userPW").val() == '') {
+            alert('비밀번호를 입력하세요.');
+            $("#userPW").focus();
+            return false;
+        } else if ($("#userPW").val() < 4 && $("#userPW").val() < 9) {
+            alert('비밀번호는 4~8자리여야합니다.');
+            $("#userPW").focus();
+            return false;
+        }
+
+        if ($("#userName").val() == '') {
+            alert('이름을 입력하세요.');
+            $("#userName").focus();
+            return false;
+        }
+        let userID = $("#userID").val();
+        let userPW = $("#userPW").val();
+        let userName = $("#userName").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/setUser",
+            data: {
+                userID_give: userID,
+                userPW_give: userPW,
+                userName_give: userName
+            },
+            success: function (response) {
+                let msg = response['msg'];
+                alert(msg);
+                /* 배포 할때 replace 안의 주소 변경*/
+                window.location.replace("http://localhost:5000/login")
+            }
+        });
+    }
+
+</script>
