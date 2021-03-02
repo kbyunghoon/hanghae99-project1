@@ -1,10 +1,177 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <!--    /* font */-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    <title>game tree</title>
+    <meta property="og:title" content="game tree"/>
+    <meta property="og:description" content="게임 소개 사이트"/>
+    <meta property="og:image" content="{{ url_for('static', filename='or-img.jpg') }}"/>
+    <style>
+
+        .register-box {
+            width: 400px;
+            box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 80px 50px;
+            margin: auto;
+        }
+
+        .register-box-flex {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* id box */
+        .register-id-box-flex {
+            display: flex;
+        }
+
+        .id-check-btn {
+            width: 20%;
+            height: 100%;
+            border-color: #007bff;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: #ffff;
+        }
+
+        .id-check-btn:hover {
+            border-color: #007bff;
+            outline: 0;
+        }
+
+        .m-tb-15 {
+            margin: 15px 0;
+        }
+
+        .h-900 {
+            height: 900px;
+        }
+
+        .active {
+            color: #007bff !important;
+            display: block;
+        }
+    </style>
+    <script>
+        function idCheck() {
+            let idCheck = /^[A-Za-z0-9]{0,10}$/;
+            let uid = $("#userID").val()
+            if ($("#userID").val() == '') {
+                alert('아이디를 입력하세요.');
+                $("#userID").focus();
+                return false;
+            } else if (!idCheck.test(uid)) {
+                alert('아이디는 영어+숫자를 조합해 10자이하여야합니다.');
+                $("#userID").focus();
+                return false;
+            }
+            let u_id = $("#userID").val();
+            $.ajax({
+                type: "POST",
+                url: "/idCheck",
+                data: {
+                    userID_give: u_id
+                },
+                success: function (response) {
+                    let result = response['exists']
+                    if (result == true) {
+                        $("#idCheck-txt").text('이미 존재하는 아이디입니다.').addClass("active");
+                        $("#userID").focus();
+                        return false;
+                    } else if (result == false) {
+                        $("#idCheck-txt").text('사용가능한 아이디입니다.').addClass("active");
+                        return false;
+                    }
+                }
+            });
+        }
+
+        function setUser() {
+
+            if ($("#userPW").val() == '') {
+                alert('비밀번호를 입력하세요.');
+                $("#userPW").focus();
+                return false;
+            } else if ($("#userPW").val() < 4 && $("#userPW").val() < 9) {
+                alert('비밀번호는 4~8자리여야합니다.');
+                $("#userPW").focus();
+                return false;
+            }
+
+            if ($("#userName").val() == '') {
+                alert('이름을 입력하세요.');
+                $("#userName").focus();
+                return false;
+            }
+            let userID = $("#userID").val();
+            let userPW = $("#userPW").val();
+            let userName = $("#userName").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/setUser",
+                data: {
+                    userID_give: userID,
+                    userPW_give: userPW,
+                    userName_give: userName
+                },
+                success: function (response) {
+                    console.log(response)
+                    let msg = response['msg'];
+                    alert(msg);
+                    window.location.href = "";
+                }
+            });
+
+        }
+
+    </script>
 </head>
+
 <body>
-$END$
+<div class="container h-900">
+    <div class="register-box-flex">
+        <div class="register-box">
+            <h1>Register</h1>
+            <div class="register-id-box m-tb-15">
+                <div class="register-id-box-flex">
+                    <input type="text" id="userID" class="form-control " placeholder="아이디는 영어+숫자+10자 이하 입니다."
+                           aria-label="User-ID"
+                           aria-describedby="basic-addon1">
+                    <button class="btn id-check-btn" type="button" onclick="idCheck()">확인</button>
+                </div>
+            </div>
+            <span id="idCheck-txt"></span>
+            <input type="password" id="userPW" class="form-control m-tb-15" placeholder="비밀번호는 4~8자리여야합니다."
+                   aria-label="Username"
+                   aria-describedby="basic-addon1">
+            <input type="text" id="userName" class="form-control m-tb-15" placeholder="이름을 입력해주세요" aria-label="Username"
+                   aria-describedby="basic-addon1">
+            <button type="button" onclick="setUser()" class="btn btn-primary btn-lg btn-block">회원가입</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
