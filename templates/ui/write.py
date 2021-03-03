@@ -9,12 +9,6 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 write_blueprint = Blueprint('write', __name__)
 
-app = Flask(__name__)
-app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
-
-SECRET_KEY = 'SPARTA'
-
 #client = MongoClient('mongodb://test:test@localhost', 27017)
 client = MongoClient('localhost',27017)
 db =  client.dbGameTree

@@ -21,7 +21,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="crud('{{request.cookies.mytoken}}')">작성하기</button>
+                <button type="button" class="btn btn-primary" onclick="crud(document.getElementById('userId_text').textContent)">작성하기</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
             </div>
         </div>

@@ -1,12 +1,9 @@
-import re
-import requests
-from flask import Flask, Blueprint, render_template, jsonify, request
-from bs4 import BeautifulSoup
+from flask import Flask, Blueprint, jsonify, request
 from pymongo import MongoClient
 
 main_blueprint = Blueprint('main', __name__)
 
-app = Flask(__name__)
+#client = MongoClient('mongodb://test:test@localhost', 27017)
 client = MongoClient('localhost', 27017)
 db = client.dbGameTree
 

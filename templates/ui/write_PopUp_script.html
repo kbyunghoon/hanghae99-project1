@@ -1,7 +1,6 @@
 <script>
     function crud(jwt_token) {
-        var tokenValue = jwt_token;
-        let id = parseJwt(tokenValue).id;
+        let id = jwt_token;
         let url = $('#game_Url').val();
         let text = $('#game_Text').val();
 

@@ -1,7 +1,4 @@
 <script>
-
-
-
     $(document).ready(function () {
             /* -------비밀번호 일치 확인 ---------------*/
             $("#rePW").blur(function () {
@@ -16,7 +13,6 @@
             })
              /* -------비밀번호 일치 확인 끝---------------*/
         })
-
 
     function idCheck() {
         // ------------------------- id 유효성 검사 -------------------------//
@@ -90,7 +86,7 @@
                 let msg = response['msg'];
                 alert(msg);
                 /* 배포 할때 replace 안의 주소 변경*/
-                window.location.replace("http://localhost:5000/login")
+                window.location.replace("/login")
             }
         });
     }

@@ -1,5 +1,5 @@
-from pymongo import MongoClient
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, redirect, url_for
+from flask_jwt_extended import *
 from templates.login.login import login_blueprint
 from templates.register.register import register_blueprint
 from templates.ui.write import write_blueprint
@@ -7,6 +7,13 @@ from templates.main.main import main_blueprint
 from pymongo import MongoClient
 
 app = Flask(__name__)
+
+app.config.update(
+			DEBUG = True,
+			JWT_SECRET_KEY = "24Team"
+)
+jwt = JWTManager(app)
+
 app.register_blueprint(login_blueprint)
 app.register_blueprint(register_blueprint)
 app.register_blueprint(write_blueprint)
@@ -33,6 +40,17 @@ def getLogin():
 @app.route('/register')
 def getRegister():
     return render_template('/register/register.html')
+
+@app.route('/loginCheck', methods=['GET'])
+@jwt_required()
+def loginCheck():
+    user_Check = get_jwt_identity()
+
+    if user_Check is not None :
+        return jsonify({'result': 'success', 'token': user_Check})
+    else :
+        return redirect(url_for('/'))
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0',port=5000, debug=True)
