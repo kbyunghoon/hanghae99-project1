@@ -23,25 +23,22 @@ db =  client.dbGameTree
 @write_blueprint.route('/writing', methods=['POST'])
 def save_gameinfo():
     ids_receive = request.form['id']
-    title_receive = request.form['title']
+    # title_receive = request.form['title'] #URL로 대체
     text_receive = request.form['text']
-    search = request.form['url']
-    namu = 'https://namu.wiki/w/' + search
+    search = request.form['url'] #게임제목
     naver = 'https://search.naver.com/search.naver?where=nexearch&sm=tab_jum&query=' + search
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
-    data = requests.get(namu, headers=headers)
-    soup = BeautifulSoup(data.text, 'html.parser')
-    strong_things = soup.find_all('strong')
-    # a_things = soup.find_all('a')
-    # span_things = soup.find_all('span')
     data_naver = requests.get(naver, headers=headers)
     naver_main = BeautifulSoup(data_naver.text, 'html.parser')
-    gameYn = naver_main.select('.cs_common_module > div > div > div > span')[0]
-    if gameYn.find('게임') == -1:
-        return jsonify({'msg': '해당 키워드를 다시 확인해주세요.'})
+    try:
+        gameYn = naver_main.select('.cs_common_module > div > div > div > span')[0]
+        check = gameYn.find('게임')
+        if check == -1:
+            return jsonify({'msg': '해당 키워드를 다시 확인해주세요.'})
+    except:
+        return jsonify({'msg': '해당 키워드를 다시 확인해주세요!'})
     naver_info = naver_main.find('div', class_='cm_info_box')
-    naver_dt = naver_info.find_all('dt')
     naver_a = naver_info.find_all('a')
     naver_title = naver_main.find('div', class_='cm_top_wrap')
 
@@ -54,9 +51,8 @@ def save_gameinfo():
             break
     main = img['href']
     data = requests.get(main, headers=headers, verify=False)
-    gong = BeautifulSoup(data.text, 'html.parser')
+    # gong = BeautifulSoup(data.text, 'html.parser')
     image = naver_main.find('div', class_='detail_info').select('a > img')[0]['src']
-    # print(image)
 
     for lounge in naver_a: #언어, 가격, 장르, 등급, 출시일, 플랫폼 크롤링
         if lounge.find(text=re.compile("게임라운지 더보기")):
