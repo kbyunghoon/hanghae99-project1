@@ -2,20 +2,19 @@
     function crud(jwt_token) {
         var tokenValue = jwt_token;
         let id = parseJwt(tokenValue).id;
-        let title = $('#game_Title').val();
         let url = $('#game_Url').val();
         let text = $('#game_Text').val();
 
-        if (title == '' || title == undefined) {
+        var closeButton = document.getElementById('close_button');
+
+        if (url == '' || url == undefined) {
             $('#alertModal').modal('show');
+            closeButton.style.color = '#000000';
             $('.nullAlertModalText').text('제목을 입력해주세요');
-            return;
-        } else if (url == '' || url == undefined) {
-            $('#alertModal').modal('show');
-            $('.nullAlertModalText').text('url을 입력해주세요');
             return;
         } else if (text == '' || text == undefined) {
             $('#alertModal').modal('show');
+            closeButton.style.color = '#000000';
             $('.nullAlertModalText').text('소개글을 입력해주세요');
             return;
         }
@@ -26,13 +25,29 @@
             url: "/writing",
             data: {
                 id : id
-                , title: title
                 , url: url
                 , text: text
             },
             success: function (response) {
-                alert(response["msg"]);
-                window.location.reload();
+
+                var alertObj = document.getElementById('alertModal').childNodes[1].childNodes[1].childNodes[1];
+                if (response["msg"].indexOf('키워드') == -1) {
+                    alertObj.style.backgroundColor = '#FFFFFF';
+                    alertObj.childNodes[1].src = "../../static/image/playgame.png"
+                } else {
+                    alertObj.style.backgroundColor = '#FF85F0';
+                    alertObj.childNodes[1].src = "../../static/image/gameover.png"
+                }
+
+                $('#alertModal').modal('show');
+                $('.nullAlertModalText').text(response["msg"]);
+
+                $(function () { // let all dom elements are loaded
+                    $(document).on('hidden.bs.modal', '#alertModal', function () {
+                        window.location.reload();
+                    });
+                });
+
             }
         })
     }
