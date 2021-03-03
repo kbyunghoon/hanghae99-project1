@@ -18,9 +18,11 @@ db =  client.dbGameTree
 
 @register_blueprint.route('/setUser', methods=['POST'])
 def setUser():
+    # 회원정보 request
     userID = request.form['userID_give']
     userPW = request.form['userPW_give']
     userName = request.form['userName_give']
+    # 암호화
     password_hash = hashlib.sha256(userPW.encode('utf-8')).hexdigest()
 
     doc = {
@@ -33,11 +35,12 @@ def setUser():
 
     return jsonify({'msg': '회원가입이 완료되었습니다.'})
 
-#GET APT
 @register_blueprint.route('/idCheck', methods=['POST'])
 def idCheck():
-
+    #id 받아옴
     userID_receive = request.form['userID_give']
+    #db에 있는 id와 체크
     exists = bool(db.account.find_one({"userID": userID_receive}))
+
     return jsonify({'result': 'success', 'exists': exists})
 

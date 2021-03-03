@@ -1,10 +1,22 @@
+
 .register-box {
     width: 400px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
     text-align: center;
     padding: 80px 50px;
     margin: auto;
+    border-radius: 3px;
+    background-color: rgb( 255, 255, 255, 0.9);
 }
+
+.register-bg {
+    background-image: url("../../static/image/register-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
 
 .register-box-flex {
     width: 100%;
@@ -36,10 +48,11 @@
     margin: 15px 0;
 }
 
-.h-900 {
-    height: 900px;
+.h-820 {
+    height: 820px;
 }
 
+/* 확인 문구 활성화 class*/
 .active {
     color: #007bff !important;
     display: block;

@@ -22,6 +22,7 @@ def login():
     # 로그인
     userID = request.form['userID_give']
     userPW = request.form['userPW_give']
+    # 비밀번호 암호화
     pw_hash = hashlib.sha256(userPW.encode('utf-8')).hexdigest()
     result = db.account.find_one({'userID': userID, 'userPW': pw_hash})
 
@@ -31,6 +32,7 @@ def login():
          'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
 
+        # jwt token 생성
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
         # decode = jwt.decode(token, SECRET_KEY, algorithm='HS256')
         return jsonify({'result': 'success', 'token': token})

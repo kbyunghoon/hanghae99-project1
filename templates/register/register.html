@@ -8,13 +8,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 
     <!-- Css -->
-    <link rel="preload" as="style" href="../../static/css/register.css" />
-    <link rel="stylesheet" href="../../static/css/register.css" />
+    <link rel="preload" as="style" href="../../static/css/register.css?ver=1"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/register.css?dd"/>
+    <style>
+
+
+    </style>
 </head>
 
+
 <body>
-    <header>{% include './common/header.html' %}</header>
-    <div class="container h-900">
+<header>{% include './common/header.html' %}</header>
+<div class="register-bg">
+    <div class="container h-820">
         <div class="register-box-flex">
             <div class="register-box">
                 <h1>Register</h1>
@@ -30,13 +36,18 @@
                 <input type="password" id="userPW" class="form-control m-tb-15" placeholder="비밀번호는 4~8자리여야합니다."
                        aria-label="Username"
                        aria-describedby="basic-addon1" maxlength="8">
+                <input type="password" id="rePW" class="form-control m-tb-15" placeholder="비밀번호를 확인해주세요."
+                       aria-label="Username" maxlength="8"
+                       aria-describedby="basic-addon1">
+                <span id="pwChck-txt"></span>
                 <input type="text" id="userName" class="form-control m-tb-15" placeholder="이름을 입력해주세요" aria-label="Username"
                        aria-describedby="basic-addon1">
                 <button type="button" onclick="setUser()" class="btn btn-primary btn-lg btn-block">회원가입</button>
             </div>
         </div>
     </div>
-    {% include './common/body.html' %}
-    {% include './register/register_script.html' %}
+</div>
+{% include './common/body.html' %}
+{% include './register/register_script.html' %}
 </body>
 </html>

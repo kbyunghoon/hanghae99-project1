@@ -7,24 +7,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 
     <!-- Css -->
-    <link rel="preload" as="style" href="../../static/css/login.css" />
-    <link rel="stylesheet" href="../../static/css/login.css" />
+    <link rel="preload" as="style" href="../../static/css/login.css?ver=1" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/login.css?dd" />
 </head>
 <body>
     <header>{% include './common/header.html' %}</header>
-    <div class="container h-900">
-        <div class="login-box-flex">
-            <div class="login-box">
-                <h1>LOGIN</h1>
-                <input type="text" id="userID" class="form-control m-tb-15" placeholder="아이디를 입력해주세요" aria-label="Username"
-                       aria-describedby="basic-addon1">
-                <input type="password" id="userPW" class="form-control m-tb-15" placeholder="비밀번호를 입력해주세요"
-                       aria-label="Username"
-                       aria-describedby="basic-addon1">
-                <div class="register-btn text-left m-tb-15">
-                    <a href="/register" class="font-weight-bold">회원가입</a>
+    <div class="login-bg">
+        <div class="container h-820">
+            <div class="login-box-flex">
+                <div class="login-box">
+                    <h1>LOGIN</h1>
+                    <input type="text" id="userID" class="form-control m-tb-15" placeholder="아이디를 입력해주세요" aria-label="Username"
+                           aria-describedby="basic-addon1">
+                    <input type="password" id="userPW" class="form-control m-tb-15" placeholder="비밀번호를 입력해주세요"
+                           aria-label="Username"
+                           aria-describedby="basic-addon1">
+                    <div class="register-btn text-left m-tb-15">
+                        <a href="/register" class="font-weight-bold">회원가입</a>
+                    </div>
+                    <button type="button" onclick="loging()" class="btn btn-primary btn-lg btn-block">로그인</button>
                 </div>
-                <button type="button" onclick="loging()" class="btn btn-primary btn-lg btn-block">로그인</button>
             </div>
         </div>
     </div>
