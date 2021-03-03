@@ -3,6 +3,9 @@ from flask import Flask, Blueprint, jsonify, request
 import re
 import requests
 from bs4 import BeautifulSoup
+import json
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 write_blueprint = Blueprint('write', __name__)
 
@@ -34,60 +37,44 @@ def save_gameinfo():
     # span_things = soup.find_all('span')
     data_naver = requests.get(naver, headers=headers)
     naver_main = BeautifulSoup(data_naver.text, 'html.parser')
+    gameYn = naver_main.select('.cs_common_module > div > div > div > span')[0]
+    if gameYn.find('게임') == -1:
+        return jsonify({'msg': '해당 키워드를 다시 확인해주세요.'})
     naver_info = naver_main.find('div', class_='cm_info_box')
     naver_dt = naver_info.find_all('dt')
     naver_a = naver_info.find_all('a')
     naver_title = naver_main.find('div', class_='cm_top_wrap')
 
-
     #제목 크롤링
     title = naver_title.find('strong', class_='_text').text
-    # print(title)
 
-    #이미지 크롤링
+    #이미지 + 공식홈페이지 크롤링
     for img in naver_a:
         if img.find(text=re.compile("공식사이트")):
             break
     main = img['href']
-    data = requests.get(main, headers=headers)
+    data = requests.get(main, headers=headers, verify=False)
     gong = BeautifulSoup(data.text, 'html.parser')
-    print(gong.select_one('meta[property="og:image"]'))
-    try:
-        image = gong.select_one('meta[property="og:image"]')['content']
-    except:
-        image = gong.select_one('meta[name="og:image"]')['content']
+    image = naver_main.find('div', class_='detail_info').select('a > img')[0]['src']
+    # print(image)
 
-    #한국어 지원 크롤링
-    for korea in strong_things:
-        if '한국어 지원' in korea.getText().lower():
-            kor = korea.parent.parent.parent.text.partition('한국어 지원')[2].partition('[')[0]
+    for lounge in naver_a: #언어, 가격, 장르, 등급, 출시일, 플랫폼 크롤링
+        if lounge.find(text=re.compile("게임라운지 더보기")):
+            thelink = lounge['href'].replace("https://game.naver.com/r/","").replace("/home","")
             break
-        else:
-            kor = ''
-
-    #게임등급
-    for a_age in naver_dt:
-        if a_age.find(text=re.compile("등급")):
-            age = a_age.parent.text[5:]
-            break
-    # main_pack > section.sc_new.cs_common_module._cs_newgame.case_normal.color_3 > div.cm_top_wrap._sticky
-    # sub_title
-
-    #장르
-    genre = naver_title.find('span', class_='txt').text
-
-    #출시일
-    for a_release in naver_dt:
-        if a_release.find(text=re.compile("출시")):
-            release = a_release.parent.text[4:]
-            break
-
-    #플랫폼
-    for plat in naver_dt:
-        if plat.find(text=re.compile("플랫폼")):
-            platform = plat.parent.text[6:]
-            break
-
+    api = 'https://apis.naver.com/nng_main/nng_main/game/info/' + thelink
+    api_info = requests.get(api, headers=headers)
+    json_data = json.loads(api_info.text)
+    game_info = json_data['result']['contentInfo']
+    lang = game_info['language']
+    price = game_info['price']
+    genre = game_info['genre']
+    a_age = game_info['contentsRating'].split(',')
+    age = []
+    for age_split in a_age:
+        age.append(age_split.strip())
+    release = game_info['releaseDate']
+    platform = game_info['platformInfo']['platform'].replace(" ",'').split(',')
     like = 0
 
 
@@ -95,7 +82,8 @@ def save_gameinfo():
         'id' : ids_receive,
         'game_name':title,
         'image':image,
-        'kor':kor,
+        'price':price,
+        'lang':lang,
         'genre':genre,
         'age':age,
         'release':release,
