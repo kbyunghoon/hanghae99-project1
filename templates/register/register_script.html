@@ -42,6 +42,7 @@
                 /* id check 후 메세지 보이기 */
                 if (result == true) {
                     $("#idCheck-txt").text('이미 존재하는 아이디입니다.').addClass("active");
+                    $("#userID").val('');
                     $("#userID").focus();
                     return false;
                 } else if (result == false) {
@@ -83,10 +84,19 @@
                 userName_give: userName
             },
             success: function (response) {
-                let msg = response['msg'];
-                alert(msg);
+                let result = response['result'];
+                let msg = ""
+
                 /* 배포 할때 replace 안의 주소 변경*/
-                window.location.replace("/login")
+                if(result == "NO"){
+                    msg = "아이디가 이미 존재합니다";
+                    alert(msg);
+                }else {
+                    msg ="회원가입이 완료되었습니다.";
+                    alert(msg);
+                    window.location.replace("/main")
+                }
+
             }
         });
     }

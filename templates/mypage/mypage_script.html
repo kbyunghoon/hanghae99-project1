@@ -1,13 +1,28 @@
 <script>
-    $(document).ready(function(){
-        getMyPage();
+    $(document).ready(function () {
+        getUserInfo(userID);
     });
-     function getMyPage() {
-        var tokenValue = "{{request.cookies.mytoken}}";
-        if (tokenValue != undefined && tokenValue != null && tokenValue != '') {
-            let userID = parseJwt(tokenValue).id
 
-            $.ajax({
+    /* user ID 받아오는 function.......?*/
+    function parseJwt(token) {
+        $.ajax({
+            type: "GET",
+            url: "/loginCheck",
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+            success: function (response) {
+                if (response['result'] == 'success') {
+                    let token = response['token']
+                    getUserInfo(token)
+                }
+            }
+        });
+    };
+
+
+    function getUserInfo(userID) {
+         $.ajax({
                 type: "POST",
                 url: "/getMypage",
                 data: {
@@ -21,11 +36,9 @@
                     }
                 }
             });
-        }
-
     }
 
-    function userUpdate(){
+    function userUpdate() {
         let userID = $("#userInfo_userID").text()
         let userPW = $("#userPW").val()
         console.log(userID);
@@ -42,13 +55,13 @@
         }
 
         $.ajax({
-            type:"POST",
-            url:"/userUpdate",
+            type: "POST",
+            url: "/userUpdate",
             data: {
                 'userID_give': userID,
                 'userPW_give': userPW
             },
-            success:function(response){
+            success: function (response) {
                 alert("회원정보가 수정되었습니다.");
                 window.location.replace("/mypage")
             }

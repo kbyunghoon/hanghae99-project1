@@ -19,15 +19,18 @@ def setUser():
     # 암호화
     password_hash = hashlib.sha256(userPW.encode('utf-8')).hexdigest()
 
-    doc = {
-        'userName':userName,
-        'userPW': password_hash,
-        'userID':userID
-    }
+    exists = bool(db.account.find_one({"userID": userID}))
+    if( exists == True):
+        return jsonify({'result':'NO'})
+    else:
+        doc = {
+            'userName': userName,
+            'userPW': password_hash,
+            'userID': userID
+        }
 
-    db.account.insert_one(doc)
-
-    return jsonify({'msg': '회원가입이 완료되었습니다.'})
+        db.account.insert_one(doc)
+        return  jsonify({'result':'YES'})
 
 @register_blueprint.route('/idCheck', methods=['POST'])
 def idCheck():
