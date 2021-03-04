@@ -16,7 +16,7 @@ db =  client.dbGameTree
 # 글쓰기(POST) API
 @write_blueprint.route('/writing', methods=['POST'])
 def save_gameinfo():
-    ids_receive = request.form['id'] #작성자
+    ids_receive = request.form['id'].replace("님 안녕하세요.","") #작성자
     search = request.form['url']  # 게임제목
     text_receive = request.form['text'] #소개글
 
