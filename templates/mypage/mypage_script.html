@@ -1,27 +1,11 @@
 <script>
     $(document).ready(function () {
-        getUserInfo(userID);
+        getUserInfo(userID)
     });
-
-    /* user ID 받아오는 function.......?*/
-    function parseJwt(token) {
-        $.ajax({
-            type: "GET",
-            url: "/loginCheck",
-            headers: {
-                Authorization: 'Bearer ' + token
-            },
-            success: function (response) {
-                if (response['result'] == 'success') {
-                    let token = response['token']
-                    getUserInfo(token)
-                }
-            }
-        });
-    };
 
 
     function getUserInfo(userID) {
+        console.log(userID)
          $.ajax({
                 type: "POST",
                 url: "/getMypage",
@@ -30,6 +14,7 @@
                 },
                 success: function (response) {
                     let user =response['user']
+                    console.log(user)
                     if(user != null){
                         $("#userInfo_userID").text(user.userID)
                         $("#userInfo_userName").text(user.userName)

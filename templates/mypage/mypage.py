@@ -1,11 +1,6 @@
 from pymongo import MongoClient
-import jwt
-import datetime
 import hashlib
-from flask import Flask, render_template, jsonify, request, redirect, url_for, Blueprint
-from werkzeug.utils import secure_filename
-from datetime import datetime, timedelta
-
+from flask import Flask, jsonify, request, Blueprint
 mypage_blueprint = Blueprint('mypage', __name__)
 
 app = Flask(__name__)
@@ -14,6 +9,8 @@ db = client.dbGameTree
 
 
 # POST API
+
+
 
 @mypage_blueprint.route('/getMypage', methods=['POST'])
 def getMypage():
@@ -30,8 +27,6 @@ def userUpdate():
     userID = request.form['userID_give']
     userPW = request.form['userPW_give']
     password_hash = hashlib.sha256(userPW.encode('utf-8')).hexdigest()
-    print(userID)
-    print(userPW)
     result = bool(db.account.update_one({'userID':userID},{'$set':{'userPW':password_hash}}))
 
     if(result == True):
