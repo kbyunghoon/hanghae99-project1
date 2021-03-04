@@ -31,7 +31,7 @@
                 <div class="card-text">
                     <span class="date">{{ item['id'] }}</span>
                     <h5 class="game_title">
-                        <a href=${homepage} target="_blank" class="games">{{ item['game_name'] }}</a>
+                        <a href="{{ item['homepage'] }}" target="_blank" class="games">{{ item['game_name'] }}</a>
                     </h5>
                     <div id="tag">
                         <div class="test">{{ item['lang'] }}</div>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="stat" style="border-left: 1px solid white; padding: 0px;">
                         <div class="value">
-                            <a href="#" onclick="likeStar("{{ item['game_name'] }}")" class="card-footer-item has-text-info"
+                            <a href="#" onclick="likeStar('{{ item["game_name"] }}')" class="card-footer-item has-text-info"
                                style="color: white">
                                 추천하기
                                 <span class="icon">
