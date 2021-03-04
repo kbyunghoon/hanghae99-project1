@@ -1,5 +1,7 @@
 <script>
     function crud(jwt_token) {
+        if(doubleSubmitCheck()) return;
+
         let id = jwt_token;
         let url = $('#game_Url').val();
         let text = $('#game_Text').val();
@@ -56,6 +58,9 @@
                     $('#alertModal').modal('show');
                     $('.nullAlertModalText').text(response["msg"]);
 
+                    $(document).on('hidden.bs.modal', '#alertModal', function () {
+                        window.location.reload();
+                    });
                 }
 
             }

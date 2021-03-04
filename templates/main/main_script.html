@@ -1,13 +1,14 @@
 <script>
-        function likeStar(title) {
-            $.ajax({
-                type: 'POST',
-                url: '/like',
-                data: {title:title},
-                success: function (response) {
-                    window.location.reload()
-                }
-            });
-        }
+    function likeStar(title) {
+        if(doubleSubmitCheck()) return;
 
+        $.ajax({
+            type: 'POST',
+            url: '/like',
+            data: {title:title},
+            success: function (response) {
+                window.location.reload()
+            }
+        });
+    }
 </script>
