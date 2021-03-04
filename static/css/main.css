@@ -5,9 +5,92 @@ body {
 }
 
 .wrap {
-    width: 1000px;
+    width: auto;
     margin: auto;
 }
+
+        .card {
+            display: grid;
+            grid-template-columns: 300px;
+            grid-template-rows: 210px 280px 80px;
+            grid-template-areas: "image" "text" "stats";
+
+            border-radius: 18px;
+            background: white;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+            font-family: roboto;
+            text-align: center;
+
+
+            transition: 0.5s ease;
+            cursor: pointer;
+            margin: 30px;
+            float: left;
+        }
+
+        .card-text {
+            grid-area: text;
+            margin: 25px;
+        }
+
+        .card-text .date {
+            color: rgb(255, 7, 110);
+            font-size: 13px;
+        }
+
+        .card-text p {
+            color: grey;
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        .card-text h2 {
+            margin-top: 0px;
+            font-size: 28px;
+        }
+
+        .card-stats {
+            grid-area: stats;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            background: rgb(255, 7, 110);
+        }
+
+        .card-stats .stat {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        .border {
+            border-left: 1px solid rgb(172, 26, 87);
+        }
+
+        .card-stats .value {
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        .card-stats .value sup {
+            font-size: 12px;
+        }
+
+        .card-stats .type {
+            font-size: 11px;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        .card:hover {
+            transform: scale(1.15);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+        }
 
 .test {
     font-size: xxx-large;
@@ -66,13 +149,14 @@ body {
 }
 
 #cards-box {
-  display: inline-block;
-  padding: 10px;
-  animation: fadein 3s;
-  -moz-animation: fadein 3s; /* Firefox */
-  -webkit-animation: fadein 3s; /* Safari and Chrome */
-  -o-animation: fadein 3s; /* Opera */
+    display: inline-block;
+    padding: 10px;
+    animation: fadein 3s;
+    -moz-animation: fadein 3s; /* Firefox */
+    -webkit-animation: fadein 3s; /* Safari and Chrome */
+    -o-animation: fadein 3s; /* Opera */
 }
+
 @keyframes fadein {
     from {
         opacity: 0;
@@ -104,4 +188,8 @@ body {
     to {
         opacity: 1;
     }
+}
+
+.game_title {
+    word-break:keep-all;
 }

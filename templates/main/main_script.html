@@ -30,41 +30,41 @@
                             let platformtemp = `<div class="test">${platform[j]}</div>`
                             platformstemp += platformtemp
                         }
-                        temp_html = `<div class="card mini-size">
-                                        <img class="card-img-top"
-                                             src="${image}"
-                                             alt="Card image cap">
-                                        <div class="card-bodys">
-                                            <h5 class="card-title" style="float: left; padding: 0px 10px 0px 5px; margin: auto;">
-                                                <a href=${homepage} class="games"">${title}</a>
-                                            </h5>
-                                            <p class="card-text"
-                                               style="float: right; border-left: 1px solid rgba(0,0,0,.125); padding: 0px 0px 0px 5px;">${id}</p>
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item" id="hash">
+                        temp_html = `<div class="card">
+    <div style='
+            grid-area: image;
+            background: url("${image}");
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            background-size: cover;
+            background-position: center;'></div>
+    <div class="card-text">
+        <span class="date">${id}</span>
+        <h5 class="game_title"><a href=${homepage} target="_blank"class="games">${title}</a></h5>
+        <div id="tag">
                                             <div class="test">${lang}</div>
                                             <div class="test">${price}</div>
                                             <div class="test">${genre}</div>
                                             ${agestemp}
                                             ${platformstemp}
-                                            </li>
-                                        </ul>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="sss">출시일 : ${release}</li>
-                                        </ul>
-                                        <div class="card-body" style="font-size: 15px;">
-                                        ${text}
-                                            </div>
-                                                                            <footer class="card-footer">
-                                                                                <a href="#" onclick="likeStar('${title}')" class="card-footer-item has-text-info">
-                                                                                    ${like}명 추천!
+        </div>
+        <p>${text}</p>
+    </div>
+    <div class="card-stats">
+        <div class="stat">
+            <div class="value">${like}명</div>
+            <div class="type">추천</div>
+        </div>
+        <div class="stat" style="border-left: 1px solid white;">
+            <div class="value"><a href="#" onclick="likeStar('${title}')" class="card-footer-item has-text-info" style="color: white">
+                                                                                    추천하기
                                                                                     <span class="icon">
                                                                           <i class="fas fa-thumbs-up"></i>
                                                                         </span>
-                                                                                </a>
-                                                                            </footer>
-                            </div>`
+                                                                                </a></div>
+        </div>
+    </div>
+</div>`
                         $('#cards-box').append(temp_html)
                     }
                 }
