@@ -1,24 +1,20 @@
 <script>
     $(document).ready(function () {
-        getUserInfo(userID)
+        var tokenValue = "{{request.cookies.mytoken}}";
+        getUserInfo(tokenValue)
     });
 
 
-    function getUserInfo(userID) {
-        console.log(userID)
+    function getUserInfo(token) {
          $.ajax({
-                type: "POST",
-                url: "/getMypage",
-                data: {
-                    userID_give: userID
+                type: "GET",
+                url: "/loginCheck",
+                headers: {
+                    Authorization: 'Bearer '+ token
                 },
                 success: function (response) {
-                    let user =response['user']
-                    console.log(user)
-                    if(user != null){
-                        $("#userInfo_userID").text(user.userID)
-                        $("#userInfo_userName").text(user.userName)
-                    }
+                    $("#userInfo_userID").text(response['userID'])
+                    $("#userInfo_userName").text(response['userName'])
                 }
             });
     }

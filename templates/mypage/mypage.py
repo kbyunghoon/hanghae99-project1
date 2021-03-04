@@ -10,18 +10,6 @@ db = client.dbGameTree
 
 # POST API
 
-
-
-@mypage_blueprint.route('/getMypage', methods=['POST'])
-def getMypage():
-    userID = request.form['userID_give']
-    user_info = db.account.find_one({"userID": userID}, {"_id": False})
-
-    return jsonify({'user':user_info})
-
-
-
-
 @mypage_blueprint.route('/userUpdate', methods=['POST'])
 def userUpdate():
     userID = request.form['userID_give']

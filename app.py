@@ -57,9 +57,10 @@ def getMypageUpdate():
 @jwt_required()
 def loginCheck():
     user_Check = get_jwt_identity()
+    user_info = db.account.find_one({"userID": user_Check})
 
     if user_Check is not None :
-        return jsonify({'result': 'success', 'token': user_Check})
+        return jsonify({'result': 'success', 'token': user_Check, 'userName': user_info['userName'], 'userID': user_info['userID']})
     else :
         return redirect(url_for('/'))
 
