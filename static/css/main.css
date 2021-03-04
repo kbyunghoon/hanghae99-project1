@@ -12,8 +12,8 @@ body {
 
         .card {
             display: grid;
-            grid-template-columns: 270px;
-            grid-template-rows: 270px 300px 80px;
+            grid-template-columns: 300px;
+            grid-template-rows: 270px 250px 80px;
             grid-template-areas: "image" "text" "stats";
 
             border-radius: 18px;

@@ -20,4 +20,4 @@ def like_game():
     current_like = targeting['like']
     new_like = current_like + 1
     db.writeGamePost.update_one({'game_name': title_receive}, {'$set': {'like': new_like}})
-    return jsonify({'msg': title_receive + '를 추천하셨습니다.'})
+    return jsonify({})
