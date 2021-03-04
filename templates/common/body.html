@@ -26,13 +26,15 @@
             success: function (response) {
                 if (response['result'] == 'success') {
                     document.getElementById("userId_text").textContent = response['token'] + document.getElementById("userId_text").textContent;
+                    $("#userInfo_userID").text(response['userID'])
+                    $("#userInfo_userName").text(response['userName'])
                 }
             }
         });
     };
 
     function logIn() {
-        window.location.replace("http://localhost:5000/login");
+        window.location.replace("/login");
     }
 
     function logOut(cookie) {

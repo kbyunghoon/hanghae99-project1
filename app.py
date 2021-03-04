@@ -33,7 +33,8 @@ db =  client.dbGameTree
 # HTML 화면 호출
 @app.route('/')
 def getMain():
-    return render_template('/main/main.html')
+    games = list(db.writeGamePost.find({}, {'_id': False}).sort("like", -1))
+    return render_template('/main/main.html', card_navi = games)
 
 @app.route('/login')
 def getLogin():

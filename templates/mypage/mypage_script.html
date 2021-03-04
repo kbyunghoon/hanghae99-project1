@@ -1,38 +1,21 @@
 <script>
-    $(document).ready(function () {
-        var tokenValue = "{{request.cookies.mytoken}}";
-        getUserInfo(tokenValue)
-    });
-
-
-    function getUserInfo(token) {
-        $.ajax({
-            type: "GET",
-            url: "/loginCheck",
-            headers: {
-                Authorization: 'Bearer ' + token
-            },
-            success: function (response) {
-                $("#userInfo_userID").text(response['userID'])
-                $("#userInfo_userName").text(response['userName'])
-            }
-        });
-    }
 
     function userUpdate() {
+        var alertObj = document.getElementById('alertModal').childNodes[1].childNodes[1].childNodes[1];
+        alertObj.style.backgroundColor = '#F781FF';
+        alertObj.childNodes[1].src = "../../static/image/lock.png"
         let userID = $("#userInfo_userID").text()
         let userPW = $("#userPW").val()
+
         if ($("#userPW").val() == '') {
-
-            msg = '비밀번호를 입력하세요.';
             $('#alertModal').modal('show');
-            $('.nullAlertModalText').text(msg);
+            $('.nullAlertModalText').text('비밀번호를 입력해주세요');
+            userPW.focus();
             return false;
-
         } else if ($("#userPW").val().length < 4 && $("#userPW").val().length < 9) {
-            msg = '비밀번호는 4~8자리여야합니다.';
             $('#alertModal').modal('show');
-            $('.nullAlertModalText').text(msg);
+            $('.nullAlertModalText').text('비밀번호는 4~8자리여야합니다.');
+            userPW.focus();
             return false;
         }
 
@@ -44,16 +27,13 @@
                 'userPW_give': userPW
             },
             success: function (response) {
-
-                let result = response['msg'];
-                if (result == 'succes') {
-
-                    msg = "회원정보가 수정되었습니다.";
-
-                    $('#alertModal').modal('show');
-                    $('.nullAlertModalText').text(msg);
-                    window.location.replace("/mypage")
-                }
+                alertObj.style.backgroundColor = '#FFFFFF';
+                alertObj.childNodes[1].src = "../../static/image/playgame.png"
+                $('#alertModal').modal('show');
+                $('.nullAlertModalText').text('회원정보가 수정되었습니다.');
+                $(document).on('hidden.bs.modal', '#alertModal', function () {
+                    window.location.replace('/login');
+                });
             }
         })
     }

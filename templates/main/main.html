@@ -23,7 +23,50 @@
             {% endif %}
         </div>
         <div id="cards-box" class="card-sizee">
-            <!--            카드가 들어갈곳-->
+            <!-- 카드가 들어갈곳 -->
+            {% for item in card_navi %}
+            <div class="card">
+                <div style='grid-area: image; background: url("{{ item['image'] }}"); border-top-left-radius: 15px; border-top-right-radius: 15px;
+                    background-size: cover; background-position: center;'></div>
+                <div class="card-text">
+                    <span class="date">{{ item['id'] }}</span>
+                    <h5 class="game_title">
+                        <a href=${homepage} target="_blank" class="games">{{ item['game_name'] }}</a>
+                    </h5>
+                    <div id="tag">
+                        <div class="test">{{ item['lang'] }}</div>
+                        <div class="test">{{ item['price'] }}</div>
+                        <div class="test">{{ item['genre'] }}</div>
+                        {% for agetemp in item['age'] %}
+                            <div class="test">{{ agetemp }}</div>
+                        {% endfor %}
+                        {% for platformtemp in item['platform'] %}
+                            <div class="test">{{ platformtemp }}</div>
+                        {% endfor %}
+                    </div>
+                    <p>{{ item['text'] }}</p>
+                </div>
+                <div class="card-stats">
+                    <div class="stat">
+                        <div class="value">{{ item['like'] }}명</div>
+                        <div class="type">추천</div>
+                    </div>
+                    <div class="stat" style="border-left: 1px solid white; padding: 0px;">
+                        <div class="value">
+                            <a href="#" onclick="likeStar("{{ item['game_name'] }}")" class="card-footer-item has-text-info"
+                               style="color: white">
+                                추천하기
+                                <span class="icon">
+                    <i class="fas fa-thumbs-up"></i>
+                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
         </div>
     </div>
     {% include './common/body.html' %}

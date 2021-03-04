@@ -7,12 +7,6 @@ main_blueprint = Blueprint('main', __name__)
 client = MongoClient('localhost', 27017)
 db = client.dbGameTree
 
-
-@main_blueprint.route('/write', methods=['GET'])
-def listing():
-    games = list(db.writeGamePost.find({}, {'_id': False}).sort("like", -1))
-    return jsonify({'all_game_data':games})
-
 @main_blueprint.route('/like', methods=['POST'])
 def like_game():
     title_receive = request.form['title']
