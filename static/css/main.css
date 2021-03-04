@@ -12,8 +12,8 @@ body {
 
         .card {
             display: grid;
-            grid-template-columns: 300px;
-            grid-template-rows: 210px 280px 80px;
+            grid-template-columns: 270px;
+            grid-template-rows: 270px 300px 80px;
             grid-template-areas: "image" "text" "stats";
 
             border-radius: 18px;
@@ -31,18 +31,21 @@ body {
 
         .card-text {
             grid-area: text;
-            margin: 25px;
+            margin: 5px 10px 25px 10px;
         }
 
         .card-text .date {
+            font-family: 'Noto Sans KR', sans-serif;
             color: rgb(255, 7, 110);
             font-size: 13px;
         }
 
         .card-text p {
+            font-family: 'Noto Sans KR', sans-serif;
             color: grey;
             font-size: 15px;
             font-weight: 300;
+            padding: 5px;
         }
 
         .card-text h2 {
@@ -74,15 +77,18 @@ body {
         }
 
         .card-stats .value {
+            font-family: 'Noto Sans KR', sans-serif;
             font-size: 22px;
             font-weight: 500;
         }
 
         .card-stats .value sup {
+            font-family: 'Noto Sans KR', sans-serif;
             font-size: 12px;
         }
 
         .card-stats .type {
+            font-family: 'Noto Sans KR', sans-serif;
             font-size: 15px;
             font-weight: 300;
             text-transform: uppercase;
@@ -185,4 +191,8 @@ body {
     to {
         opacity: 1;
     }
+}
+
+.game_title {
+    font-family: 'Noto Sans KR', sans-serif;
 }
