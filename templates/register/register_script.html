@@ -9,6 +9,7 @@
                 } else if (rePW != userPW) {
                     $("#pwChck-txt").text('비밀번호가 일치하지않습니다.').addClass("active");
                     $("#rePW").focus();
+                    return false
                 }
             })
              /* -------비밀번호 일치 확인 끝---------------*/
