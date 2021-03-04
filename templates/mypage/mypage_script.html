@@ -1,0 +1,58 @@
+<script>
+    $(document).ready(function(){
+        getMyPage();
+    });
+     function getMyPage() {
+        var tokenValue = "{{request.cookies.mytoken}}";
+        if (tokenValue != undefined && tokenValue != null && tokenValue != '') {
+            let userID = parseJwt(tokenValue).id
+
+            $.ajax({
+                type: "POST",
+                url: "/getMypage",
+                data: {
+                    userID_give: userID
+                },
+                success: function (response) {
+                    let user =response['user']
+                    if(user != null){
+                        $("#userInfo_userID").text(user.userID)
+                        $("#userInfo_userName").text(user.userName)
+                    }
+                }
+            });
+        }
+
+    }
+
+    function userUpdate(){
+        let userID = $("#userInfo_userID").text()
+        let userPW = $("#userPW").val()
+        console.log(userID);
+        console.log(userPW);
+
+        if ($("#userPW").val() == '') {
+            alert('비밀번호를 입력하세요.');
+            userPW.focus();
+            return false;
+        } else if ($("#userPW").val().length < 4 && $("#userPW").val().length < 9) {
+            alert('비밀번호는 4~8자리여야합니다.');
+            userPW.focus();
+            return false;
+        }
+
+        $.ajax({
+            type:"POST",
+            url:"/userUpdate",
+            data: {
+                'userID_give': userID,
+                'userPW_give': userPW
+            },
+            success:function(response){
+                alert("회원정보가 수정되었습니다.");
+                window.location.replace("/mypage")
+            }
+        })
+    }
+
+</script>
