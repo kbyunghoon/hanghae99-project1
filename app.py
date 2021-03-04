@@ -18,29 +18,33 @@ app.register_blueprint(login_blueprint)
 app.register_blueprint(register_blueprint)
 app.register_blueprint(write_blueprint)
 app.register_blueprint(main_blueprint)
-app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
-SECRET_KEY = 'SPARTA'
-
-#client = MongoClient('mongodb://test:test@localhost', 27017)
-client = MongoClient('localhost',27017)
-db =  client.dbGameTree
-
-
-# HTML 화면 호출
+# 기본 화면 호출
 @app.route('/')
 def getMain():
     return render_template('/main/main.html')
 
+# 로그인 화면 호출
 @app.route('/login')
 def getLogin():
     return render_template('/login/login.html')
 
+# 회원가입 화면 호출
 @app.route('/register')
 def getRegister():
     return render_template('/register/register.html')
 
+# 마이페이지 호출
+@app.route('/mypage')
+def getMypage():
+    return render_template('/mypage/mypage.html')
+
+# 마이페이지 갱신
+@app.route('/mypageUpdate')
+def getMypageUpdate():
+    return render_template('/mypage/mypageUpdate.html')
+
+# 로그인 확인
 @app.route('/loginCheck', methods=['GET'])
 @jwt_required()
 def loginCheck():

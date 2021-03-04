@@ -30,22 +30,24 @@
             success: function (response) {
 
                 var alertObj = document.getElementById('alertModal').childNodes[1].childNodes[1].childNodes[1];
-                if (response["msg"].indexOf('키워드') == -1) {
+                if (response["msg"].indexOf('키워드') == -1 && response["msg"].indexOf('게임') == -1) {
                     alertObj.style.backgroundColor = '#FFFFFF';
                     alertObj.childNodes[1].src = "../../static/image/playgame.png"
-                } else {
-                    alertObj.style.backgroundColor = '#FF85F0';
-                    alertObj.childNodes[1].src = "../../static/image/gameover.png"
-                }
 
-                $('#alertModal').modal('show');
-                $('.nullAlertModalText').text(response["msg"]);
+                    $('#alertModal').modal('show');
+                    $('.nullAlertModalText').text(response["msg"]);
 
-                $(function () { // let all dom elements are loaded
                     $(document).on('hidden.bs.modal', '#alertModal', function () {
                         window.location.reload();
                     });
-                });
+                } else {
+                    alertObj.style.backgroundColor = '#FFFFFF';
+                    alertObj.childNodes[1].src = "../../static/image/gameover.png"
+
+                    $('#alertModal').modal('show');
+                    $('.nullAlertModalText').text(response["msg"]);
+
+                }
 
             }
         })

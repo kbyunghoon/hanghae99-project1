@@ -16,15 +16,16 @@ db =  client.dbGameTree
 # 글쓰기(POST) API
 @write_blueprint.route('/writing', methods=['POST'])
 def save_gameinfo():
-    ids_receive = request.form['id']
-    # title_receive = request.form['title'] #URL로 대체
-    text_receive = request.form['text']
-    search = request.form['url'] #게임제목
+    ids_receive = request.form['id'] #작성자
+    search = request.form['url']  # 게임제목
+    text_receive = request.form['text'] #소개글
+
     naver = 'https://search.naver.com/search.naver?where=nexearch&sm=tab_jum&query=' + search
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data_naver = requests.get(naver, headers=headers)
     naver_main = BeautifulSoup(data_naver.text, 'html.parser')
+
     try:
         gameYn = naver_main.select('.cs_common_module > div > div > div > span')[0]
         check = gameYn.find('게임')
@@ -32,12 +33,20 @@ def save_gameinfo():
             return jsonify({'msg': '해당 키워드를 다시 확인해주세요.'})
     except:
         return jsonify({'msg': '해당 키워드를 다시 확인해주세요!'})
+
     naver_info = naver_main.find('div', class_='cm_info_box')
     naver_a = naver_info.find_all('a')
     naver_title = naver_main.find('div', class_='cm_top_wrap')
 
     #제목 크롤링
     title = naver_title.find('strong', class_='_text').text
+
+    #중복된 게임 게시글이 있는지 확인
+    overCheck = db.writeGamePost.find_one({'game_name': title})
+
+    if overCheck is not None :
+        return jsonify({'msg': '해당 게임은 이미 등록되어 있습니다.'})
+    
 
     #이미지 + 공식홈페이지 크롤링
     for img in naver_a:

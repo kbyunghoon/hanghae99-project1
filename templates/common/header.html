@@ -12,7 +12,9 @@
         <button id="logIn_button" type="button" class="btn btn-outline-primary" onclick="logIn()">Log In</button>
         {% elif request.cookies.mytoken is not none and request.cookies.mytoken != undefined %}
         <button id="logOut_button" type="button" class="btn btn-outline-danger" onclick="logOut('mytoken')">Log Out</button>
-        <p id="userId_text" class="log-Text">님 안녕하세요.</p>
+        <a href="/mypage">
+            <p id="userId_text" class="log-Text">님 안녕하세요.</p>
+        </a>
         {% endif %}
     </div>
 </nav>
