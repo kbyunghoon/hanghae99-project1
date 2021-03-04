@@ -15,7 +15,7 @@ input:focus {outline:none;}
     background-color: rgb( 255, 255, 255, 0.9);
 }
 
-.mypage-bg {
+body {
     background-image: url("../../static/image/register-bg.jpg");
     background-size: cover;
     background-position: center;

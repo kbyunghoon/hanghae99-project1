@@ -26,6 +26,7 @@
             success: function (response) {
                 if (response['result'] == 'success') {
                     document.getElementById("userId_text").textContent = response['token'] + document.getElementById("userId_text").textContent;
+                    getUserInfo(response['token']);
                 }
             }
         });
@@ -40,5 +41,38 @@
         document.cookie = cookie + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         location.reload();
     }
+
+    // 로딩중
+    function loadingStart() {
+        LoadingWithMask();
+    }
+
+    // 로딩끝
+    function loadingEnd() {
+        setTimeout("closeLoadingWithMask()", 0);
+    }
+
+    function LoadingWithMask() {
+        //화면에 출력할 마스크를 설정해줍니다.
+        var loadingImg = '';
+
+        loadingImg += "<div id='loadingImg'>";
+        loadingImg += " <img src='../../static/image/Gear-0.2s-200px.gif' style='position: absolute; " +
+            "z-index: 1; left: 35%; top: 20%; margin-top: -25px; margin-left: -25px;'/>";
+        loadingImg += "</div>";
+
+        //화면에 레이어 추가
+        $('body')
+            $('.writePopUpBody').prepend(loadingImg)
+
+        //로딩중 이미지 표시
+        $('#loadingImg').show();
+    }
+
+    function closeLoadingWithMask() {
+        $('#loadingImg').hide();
+        $('#loadingImg').remove();
+    }
+
 
 </script>

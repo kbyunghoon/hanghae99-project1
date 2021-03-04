@@ -10,40 +10,36 @@
     <!-- Css -->
     <link rel="preload" as="style" href="../../static/css/mypage.css"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/mypage.css?fd"/>
-    <style>
-
-
-    </style>
 </head>
 
 
 <body>
-<header>{% include './common/header.html' %}</header>
-<div class="mypage-bg">
-    <div class="container h-820">
-        <div class="mypage-box-flex">
-            <div class="mypage-box">
-                <h1>My Page</h1>
-                <table class="mypage-table">
-                    <tr>
-                        <td>아이디</td>
-                        <td id="userInfo_userID"></td>
-                    </tr>
-                    <tr>
-                        <td>비밀번호</td>
-                        <td> ***** </td>
-                    </tr>
-                    <tr>
-                        <td>이름</td>
-                        <td id="userInfo_userName"></td>
-                    </tr>
-                </table>
-                <button type="button" onclick="location.href='/mypageUpdate'" class="btn btn-primary btn-lg btn-block">수정하기</button>
+    <header>{% include './common/header.html' %}</header>
+    <div class="mypage-bg">
+        <div class="container h-820">
+            <div class="mypage-box-flex">
+                <div class="mypage-box">
+                    <h1>My Page</h1>
+                    <table class="mypage-table">
+                        <tr>
+                            <td>아이디</td>
+                            <td id="userInfo_userID"></td>
+                        </tr>
+                        <tr>
+                            <td>비밀번호</td>
+                            <td> ***** </td>
+                        </tr>
+                        <tr>
+                            <td>이름</td>
+                            <td id="userInfo_userName"></td>
+                        </tr>
+                    </table>
+                    <button type="button" onclick="location.href='/mypageUpdate'" class="btn btn-primary btn-lg btn-block">수정하기</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{% include './common/body.html' %}
-{% include './mypage/mypage_script.html' %}
+    {% include './common/body.html' %}
+    {% include './mypage/mypage_script.html' %}
 </body>
 </html>

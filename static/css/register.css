@@ -9,7 +9,7 @@
     background-color: rgba( 255, 255, 255, 0.9);
 }
 
-.register-bg {
+body {
     background-image: url("../../static/image/register-bg.jpg");
     background-size: cover;
     background-position: center;

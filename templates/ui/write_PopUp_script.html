@@ -27,6 +27,15 @@
                 , url: url
                 , text: text
             },
+
+            beforeSend: function() {
+                loadingStart();
+            },
+
+            complete: function () {
+                loadingEnd();
+            },
+
             success: function (response) {
 
                 var alertObj = document.getElementById('alertModal').childNodes[1].childNodes[1].childNodes[1];

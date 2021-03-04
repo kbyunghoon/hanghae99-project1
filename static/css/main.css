@@ -2,6 +2,7 @@ body {
     background-image: url('https://wallpapercave.com/wp/wp4585033.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .wrap {
@@ -82,7 +83,7 @@ body {
         }
 
         .card-stats .type {
-            font-size: 11px;
+            font-size: 15px;
             font-weight: 300;
             text-transform: uppercase;
         }
@@ -114,10 +115,6 @@ body {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 0.25rem;
-}
-
-* {
-    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .sss {
@@ -188,8 +185,4 @@ body {
     to {
         opacity: 1;
     }
-}
-
-.game_title {
-    word-break:keep-all;
 }

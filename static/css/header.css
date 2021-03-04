@@ -1,6 +1,7 @@
-.logo-a:link { color: black; text-decoration: none;}
-.logo-a:visited { color: black; text-decoration: none;}
-.logo-a:hover { color: black; text-decoration: underline;}
+.log-Text:hover {
+    -webkit-animation: bounce 1s;
+    animation: bounce 1s;
+}
 
 #header {
     position: relative;

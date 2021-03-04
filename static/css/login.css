@@ -1,4 +1,4 @@
-.login-bg {
+body {
     background-image: url("../../static/image/login-bg.jpg");
     background-size: cover;
     background-position: center;
